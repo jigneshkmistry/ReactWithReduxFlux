@@ -1,12 +1,19 @@
 import React, {PropTypes} from 'react';
+import { Link, IndexLink } from 'react-router';
 
 class App extends React.Component {
   render() {
     return (
-      <div className="container-fluid">
-        <p>Header here..</p>
-        {this.props.children}
-      </div>
+      <nav>
+        <div className="container-fluid">
+          <IndexLink to="/" activeClassName="active">Home</IndexLink>
+          {" | "}
+          <Link to="/courses" activeClassName="active">Courses</Link>
+          {" | "}
+          <Link to="/about" activeClassName="active">Aboutt</Link>
+          {this.props.children}
+        </div>
+      </nav>
     );
   }
 }
