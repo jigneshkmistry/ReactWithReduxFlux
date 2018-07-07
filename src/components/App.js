@@ -10,7 +10,7 @@ class App extends React.Component {
           {" | "}
           <Link to="/courses" activeClassName="active">Courses</Link>
           {" | "}
-          <Link to="/about" activeClassName="active">Aboutt</Link>
+          <Link to="/about" activeClassName="active">About</Link>
           {this.props.children}
         </div>
       </nav>
