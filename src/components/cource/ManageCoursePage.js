@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as courseActions from '../../actions/courseActions';
 import CourseForm from './CourseForm';
 // import {authorsFormattedForDropdown} from '../../selectors/selectors';
-// import toastr from 'toastr';
+import toastr from 'toastr';
 
 export class ManageCoursePage extends React.Component {
     constructor(props, context) {
@@ -12,7 +12,8 @@ export class ManageCoursePage extends React.Component {
        
         this.state = {
             course: Object.assign({}, props.course),
-            errors: {}
+            errors: {},
+            saving: false
         };
 
         this.updateCourseState = this.updateCourseState.bind(this);
@@ -27,7 +28,7 @@ export class ManageCoursePage extends React.Component {
     }
 
     updateCourseState(event) {
-        var field = event.target.name;
+        let field = event.target.name;
         let course = Object.assign({}, this.state.course);
         course[field] = event.target.value;
         return this.setState({course: course});
@@ -35,7 +36,19 @@ export class ManageCoursePage extends React.Component {
 
     saveCourse(event) {
         event.preventDefault();
-        this.props.actions.saveCourse(this.state.course);
+        this.setState({ saving: true });
+        this.props.actions.saveCourse(this.state.course).then(()=>{
+            this.redirect();
+        }).catch(error => {
+            this.setState({ saving: false });
+            toastr.error(error);
+        });
+        
+    }
+
+    redirect() {
+        this.setState({ saving: false });
+        toastr.success('Course success');
         this.context.router.push('/courses');
     }
 
@@ -45,6 +58,7 @@ export class ManageCoursePage extends React.Component {
             <CourseForm
                 allAuthors={authors}
                 onChange={this.updateCourseState}
+                saving={this.state.saving}
                 onSave={this.saveCourse}
                 course={this.state.course}
                 errors={this.state.errors} />

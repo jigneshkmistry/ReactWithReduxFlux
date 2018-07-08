@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as courseActions from '../../actions/courseActions';
-import CourseList from './CourseList'
+import CourseList from './CourseList';
 import {browserHistory} from 'react-router';
 
 class CoursesPage extends React.Component {
@@ -25,7 +25,7 @@ class CoursesPage extends React.Component {
                     value="Add Course"
                     className="btn btn-primary"
                     onClick={this.redirectToCoursePage}></input>
-                <CourseList courses={courses}></CourseList>
+                <CourseList courses={courses}/>
             </div>
         );
     }
