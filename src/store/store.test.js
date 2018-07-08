@@ -20,7 +20,7 @@ describe('Store',()=>{
         const actual = store.getState().courses[0];
         const expected = {
             title: 'Clean Code'
-        }
+        };
         expect(actual).toEqual(expected);
     });
 });
