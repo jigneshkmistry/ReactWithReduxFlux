@@ -24,6 +24,24 @@ describe('Course Actions', () => {
       expect(action).toEqual(expectedAction);
     });
   });
+
+  describe('deleteCourseSuccess', () => {
+    it('should create a DELETE_COURSE_SUCCESS action', () => {
+      //arrange
+      const id = 'clean-code';
+      const expectedAction = {
+        type: types.DELETE_COURSE_SUCCESS,
+        id: 'clean-code'
+      };
+
+      //act
+      const action = courseActions.deleteCourseSuccess(id);
+
+      //assert
+      expect(action).toEqual(expectedAction);
+    });
+  });
+
 });
 
 // Test an async action
