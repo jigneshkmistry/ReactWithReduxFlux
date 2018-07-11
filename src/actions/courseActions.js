@@ -42,7 +42,6 @@ export function saveCourse(course) {
     };
 }
 
-
 export function deleteCourse(courseID) {
     return function (dispatch, getState) {
         dispatch(beginAjaxCall());

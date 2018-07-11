@@ -79,6 +79,32 @@ describe('Async Actions', () => {
         done();
       });
     });
+
+    it('should create BEGIN_AJAX_CALL and DELETE_COURSE_SUCCESS when deleting courses', (done) => {
+      // In a real app, you'd likely make a real HTTP call.
+      // To mock out that http call, you can use Nock to intercept all
+      // calls to a given address or pattern. This means you can test
+      // without making actual HTTP calls, and specify the data
+      // your mock API should return. Since we're already hitting a mock
+      // API, there's no need to call nock in this test.
+
+      // Here's an example call to nock.
+      // nock('http://example.com/')
+      //   .get('/courses')
+      //   .reply(200, { body: { course: [{ id: 'clean-code', title: 'Clean Code'}] }});
+
+      const expectedActions = [
+        {type: types.BEGIN_AJAX_CALL},
+        {type: types.DELETE_COURSE_SUCCESS, body: {id: 'clean-code'}}
+      ];
+      const store = mockStore({courses: []}, expectedActions, done);
+      store.dispatch(courseActions.deleteCourse()).then(() => {
+        const actions = store.getActions();
+        expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
+        expect(actions[1].type).toEqual(types.DELETE_COURSE_SUCCESS);
+        done();
+      });
+    });
   });
 });
 
