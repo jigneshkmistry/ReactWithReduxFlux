@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import AuthorListRow from './authorListRow';
 
-const AuthorList = ({ authors,onDeleteClick }) => {
+const AuthorList = ({ authors,deleting,onDeleteClick }) => {
     return (
         <table className="table">
             <thead>
@@ -16,6 +16,7 @@ const AuthorList = ({ authors,onDeleteClick }) => {
                 {authors.map(author =>
                     <AuthorListRow key={author.id} 
                         author={author} 
+                        deleting={deleting}
                         onDeleteClick={onDeleteClick}/>
                 )}
             </tbody>
@@ -25,6 +26,7 @@ const AuthorList = ({ authors,onDeleteClick }) => {
 
 AuthorList.propTypes = {
     authors: PropTypes.array.isRequired,
+    deleting: PropTypes.bool.isRequired,
     onDeleteClick: PropTypes.func.isRequired
 };
 
